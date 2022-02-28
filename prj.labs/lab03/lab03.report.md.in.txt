@@ -2,7 +2,7 @@
 автор: Альмиева Р.Р.
 дата: @time_stemp@
 
-<!-- url: https://github.com/idRain/almieva_r_r/tree/main/prj.labs/lab03 -->
+url: https://github.com/idRain/almieva_r_r/tree/main/prj.labs/lab03
 
 ### Задание
 1. В качестве тестового использовать изображение data/cross_0256x0256.png

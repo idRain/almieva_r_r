@@ -39,6 +39,8 @@ int main() {
 
   cv::Mat graph(512, 512, CV_8UC1);
   drawGraph(table, 256, 2, graph);
+  cv::line(graph, cv::Point(0, 0), cv::Point(0, 511), {150});
+  cv::line(graph, cv::Point(0, 511), cv::Point(511, 511), {150});
   cv::imwrite("lab03_viz_func.png", graph);
 
   cv::Mat lut(1, 256, CV_8UC1, table);
@@ -49,25 +51,13 @@ int main() {
   cv::imwrite("lab03_gre_res.png", gre_res);
 
   //func to rgb
-  cv::Mat rgb[3][3];
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      //zero Mat
-      cv::Mat zero(256, 256, CV_8UC1);
-      zero = 0;
-      rgb[i][j] = zero;
-    }
-  }
-  
   cv::Mat channels[3];
   cv::split(rgb_img, channels);
   for (int i = 0; i < 3; i++) {
-    cv::LUT(channels[i], lut, rgb[i][i]);
+    cv::LUT(channels[i], lut, channels[i]);
   }
 
-  cv::Mat rgb_res(256, 768, CV_8UC3);
-  for (int i = 0; i < 3; i++) {
-    cv::merge(rgb[i], 3, rgb_res(cv::Rect(i * 256, 0, 256, 256)));
-  }
+  cv::Mat rgb_res(256, 256, CV_8UC3);
+  cv::merge(channels, 3, rgb_res);
   cv::imwrite("lab03_rgb_res.png", rgb_res);
 }
